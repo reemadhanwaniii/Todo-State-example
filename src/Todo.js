@@ -10,6 +10,16 @@ function Todo(){
      let remainingItems = todoItems.filter((todo) => todo.id !== id);
      setTodoItems(remainingItems);
    }
+   
+   function editTodo(id,newTodo){
+        let updatedTodo = todoItems.map((todo)=>{
+            if(todo.id === id){
+                todo.data = newTodo
+            }
+            return todo;
+        });
+        setTodoItems(updatedTodo);
+   }
 
    return(
     <>
@@ -23,7 +33,11 @@ function Todo(){
             Add Todo
         </button>
         <ul>
-            {todoItems.map((todo)=><TodoItem todo={todo} key={todo.id} delete={()=>deleteTodo(todo.id)}/>)}
+            {todoItems.map((todo)=><TodoItem 
+                                        todo={todo} 
+                                        key={todo.id} 
+                                        delete={()=>deleteTodo(todo.id)} 
+                                        edit={(newTodo)=>editTodo(todo.id,newTodo)}/>)}
         </ul>
     </>
       

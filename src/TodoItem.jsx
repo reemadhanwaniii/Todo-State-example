@@ -1,14 +1,23 @@
 import { useState } from "react";
 
 function TodoItem(props) {
-  const [isFinished,setIsFinished] = useState(false);
+  const [isEditing,setIsEditing] = useState(false);
+  const [todoData,setTodoData] = useState(props.todo.data);
+
   return(
     <>
-      <li>{props.todo.data}</li>
+      <li>
+        {isEditing?<input type="text" value={todoData} onChange={(e)=>{setTodoData(e.target.value)}}/>:<span>{props.todo.data}</span>}
+      </li>
       <button onClick={()=>{
-        setIsFinished(!isFinished);
         props.delete();
-      }}>{isFinished?'Redo':'Done'}</button>
+      }}>Done</button>
+      <button onClick={()=>{
+        setIsEditing(!isEditing);
+        props.edit(todoData);
+      }}>
+        {isEditing?'Save':'Edit'}
+      </button>
     </>
    
   )
