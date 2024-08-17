@@ -1,6 +1,7 @@
 function TodoList ({todos}) {
+    console.log(todos);
     return(
-        <ul>{todos.map((todo)=><li key={todo.id}>{todo.data}</li>)}</ul>
+        <ul>{todos.map((todo,index)=><li key={index}>{todo}</li>)}</ul>
     )
 }
 

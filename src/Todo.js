@@ -2,22 +2,26 @@ import { useState } from "react";
 import TodoList from "./TodoList";
 
 function Todo() {
-  let todos = [{id:1,data: "todo1"},{id:2,data:"todo2"},{id:3,data:"todo3"}];
+  
   const [text,setText] = useState("");
-
-  /**
-   * we add an input tag and button on click of Add todo it will add todo in array but this functionality will not work
-   * beacuse todos is a normal array and it will not rerender when array changes so instead of local array we need to maintai state variable
-   */
-
-
+  const [todo,setTodo] = useState([]);
+ 
   return(
     <>
-        <input onChange={(e)=>setText(e.target.value)}type="text" placeholder="new todo..."/><br/>
-        <button onClick={()=>{todos.push(text)}}>Add Todo</button>
-        <TodoList todos={todos}/>
+        <input onChange={(e)=>setText(e.target.value)} type="text" placeholder="new todo..."/><br/>
+        <button onClick={()=>{setTodo([...todo,text])}}>Add Todo</button>
+        <TodoList todos={todo}/>
     </>
   )
 }
 
 export default Todo;
+
+
+/**
+ * if we want to add new element in array what we do is use push method
+ * arr = [1,2,3,4]
+ * arr.push(5)
+ * 
+ * but in case of state we can't do like that because setTodo is function and it expects an array. so we destructure array and pass it to setTodo method
+ */
